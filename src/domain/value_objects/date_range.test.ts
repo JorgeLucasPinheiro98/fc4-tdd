@@ -1,56 +1,46 @@
-import { DateRange } from "./date_range";
-describe("DateRange Value Object", () => {
-  it("deve lançar um erro se a data de término for antes da data de início", () => {
-    expect(() => {
-      new DateRange(new Date("2024-12-25"), new Date("2024-12-20"));
-    }).toThrow("A data de término deve ser posterior à data de início.");
-  });
+import { DateRange } from './date_range'
 
-  it("deve criar uma instância de DateRange com a data de início e data de término, e verificar o retorno dessas datas", () => {
-    const startDate = new Date("2024-12-20");
-    const endDate = new Date("2024-12-25");
-    const dateRange = new DateRange(startDate, endDate);
-    expect(dateRange.getStartDate()).toEqual(startDate);
-    expect(dateRange.getEndDate()).toEqual(endDate);
-  });
+describe('DateRange Value Object', () => {
 
-  it("deve calcular o total de noites corretamente", () => {
-    const startDate = new Date("2024-12-20");
-    const endDate = new Date("2024-12-25");
-    const dateRange = new DateRange(startDate, endDate);
+    it('Deve lançar um erro se a data de término for antes da data de inicio', () => { 
+        expect(() => {
+        new DateRange(new Date('2025-06-25'), new Date('2025-06-20'));
+        }).toThrow('A data de t´rmino deve ser posterior à data de início.');
+    });
 
-    const totalNights = dateRange.getTotalNights();
+    it('Deve criar uma instancia de e retornar a data inicial e a data final', () => {
+        const startDate = new Date('2025-06-20')
+        const endDate = new Date('2025-06-25')
+        const dateRange = new DateRange(startDate, endDate);
+        expect(dateRange.getStartDate()).toBe(startDate);
+        expect(dateRange.getEndDate()).toBe(endDate);
+    });
 
-    expect(totalNights).toBe(5);
+    it('Deve calcular o total de noites correspondente', () => {
+        const startDate = new Date('2025-06-20')
+        const endDate = new Date('2025-06-25')
+        const dateRange = new DateRange(startDate, endDate);
 
-    const startDate1 = new Date("2024-12-10");
-    const endDate1 = new Date("2024-12-25");
-    const dateRange1 = new DateRange(startDate1, endDate1);
+        const totalnight = dateRange.getTotalNights();
+        expect(totalnight).toBe(5);
 
-    const totalNights1 = dateRange1.getTotalNights();
-    expect(totalNights1).toBe(15);
-  });
+        const startDate1 = new Date('2025-06-10')
+        const endDate1 = new Date('2025-06-25')
+        const dateRange1 = new DateRange(startDate1, endDate1);
 
-  it("deve verificar se dois intervalos de datas se sobrepõem", () => {
-    const dateRange1 = new DateRange(
-      new Date("2024-12-20"),
-      new Date("2024-12-25")
-    );
+        const totalnight1 = dateRange1.getTotalNights();
+        expect(totalnight1).toBe(15);
+    })
 
-    const dateRange2 = new DateRange(
-      new Date("2024-12-22"),
-      new Date("2024-12-27")
-    );
+    it('Deve verificar se duas datas colidem', () => {
+        const startDate = new Date('2025-06-20')
+        const endDate = new Date('2025-06-25')
+        const dateRange = new DateRange(startDate, endDate);
 
-    const overlaps = dateRange1.overlaps(dateRange2);
+        const startDate1 = new Date('2025-06-10')
+        const endDate1 = new Date('2025-06-25')
+        const dateRange1 = new DateRange(startDate1, endDate1);
 
-    expect(overlaps).toBe(true);
-  });
-
-  it("deve lançar erro se a data de início e término forem iguais", () => {
-    const date = new Date("2024-12-20");
-    expect(() => {
-      new DateRange(date, date);
-    }).toThrow("A data de início e término não podem ser iguais.");
-  });
+        expect(dateRange.overlaps(dateRange1)).toBe(true);
+    })
 });

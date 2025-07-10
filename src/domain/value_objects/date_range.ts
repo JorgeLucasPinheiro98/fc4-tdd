@@ -1,38 +1,29 @@
 export class DateRange {
-  private readonly startDate: Date;
-  private readonly endDate: Date;
+    private readonly dateStart: Date;
+    private readonly dateEnd: Date;
+    constructor( dateStart: Date, dateEnd: Date) {
+        if( dateStart >= dateEnd) {
+            throw new Error('A data de t´rmino deve ser posterior à data de início.')
+        }
 
-  constructor(startDate: Date, endDate: Date) {
-    this.validateDates(startDate, endDate);
-    this.startDate = startDate;
-    this.endDate = endDate;
-  }
-
-  private validateDates(startDate: Date, endDate: Date): void {
-    if (startDate == endDate) {
-      throw new Error("A data de início e término não podem ser iguais.");
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
     }
-    if (endDate < startDate) {
-      throw new Error("A data de término deve ser posterior à data de início.");
+
+    getTotalNights(): number {
+        const diffTime = this.dateEnd.getTime() - this.dateStart.getTime();
+        return Math.ceil(diffTime / (1000 * 3600 * 24));
     }
-  }
 
-  getStartDate(): Date {
-    return this.startDate;
-  }
+    getStartDate(): Date {
+        return this.dateStart;
+    }
 
-  getEndDate(): Date {
-    return this.endDate;
-  }
+    getEndDate(): Date {
+        return this.dateEnd;
+    }
 
-  getTotalNights(): number {
-    const diffTime = this.endDate.getTime() - this.startDate.getTime();
-    return Math.ceil(diffTime / (1000 * 3600 * 24));
-  }
-
-  overlaps(other: DateRange): boolean {
-    return (
-      this.startDate < other.endDate && other.getStartDate() < this.endDate
-    );
-  }
+    overlaps(date: DateRange): boolean {
+        return this.dateStart <= date.dateEnd && date.getEndDate() <= this.dateEnd;
+    }
 }
