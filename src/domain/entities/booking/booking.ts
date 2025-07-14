@@ -7,12 +7,14 @@ export class Booking {
     private property: Property;
     private user: User;
     private dateRange: DateRange;
+    private guest: number;
 
-    constructor(id: string, property: Property, user: User, dateRange: DateRange) {
+    constructor(id: string, property: Property, user: User, dateRange: DateRange, guest: number) {
         this.id = id;
         this.property = property;
         this.user = user;
         this.dateRange = dateRange;
+        this.guest = guest
     }
 
     getId(): string {

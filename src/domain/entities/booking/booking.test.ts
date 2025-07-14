@@ -17,7 +17,8 @@ describe('Teste Entity Booking', () => {
             '1',
             property,
             user,
-            dateRange
+            dateRange,
+            2
         );
 
         expect(booking.getId()).toBe('1');
