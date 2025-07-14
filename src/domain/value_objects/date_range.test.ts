@@ -5,7 +5,13 @@ describe('DateRange Value Object', () => {
     it('Deve lançar um erro se a data de término for antes da data de inicio', () => { 
         expect(() => {
         new DateRange(new Date('2025-06-25'), new Date('2025-06-20'));
-        }).toThrow('A data de t´rmino deve ser posterior à data de início.');
+        }).toThrow('A data de término deve ser posterior à data de início.');
+    });
+
+    it('Deve lançar um erro se a data de término for antes da data de inicio', () => { 
+        expect(() => {
+        new DateRange(new Date('2025-06-20'), new Date('2025-06-20'));
+        }).toThrow('A data de término deve ser posterior à data de início.');
     });
 
     it('Deve criar uma instancia de e retornar a data inicial e a data final', () => {

@@ -2,10 +2,7 @@ export class DateRange {
     private readonly dateStart: Date;
     private readonly dateEnd: Date;
     constructor( dateStart: Date, dateEnd: Date) {
-        if( dateStart >= dateEnd) {
-            throw new Error('A data de t´rmino deve ser posterior à data de início.')
-        }
-
+        this.validateDates(dateStart, dateEnd)
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
     }
@@ -25,5 +22,11 @@ export class DateRange {
 
     overlaps(date: DateRange): boolean {
         return this.dateStart <= date.dateEnd && date.getEndDate() <= this.dateEnd;
+    }
+
+    private validateDates(dateStart: Date, dateEnd: Date) {
+        if( dateStart >= dateEnd) {
+            throw new Error('A data de término deve ser posterior à data de início.')
+        }
     }
 }
