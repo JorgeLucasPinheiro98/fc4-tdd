@@ -28,7 +28,7 @@ describe('Teste Entity Booking', () => {
 
     });
 
-    it('Deve retornar um erro (O numero de hospedes deve ser maior ou igual a ---)', () => {
+    it('Deve criar uma reserva com sucesso e retornar o valor', () => {
         const property = new Property(
             'Casa na Praia',
             'Uma bela Casa na Praia de São Miguel',
@@ -43,6 +43,80 @@ describe('Teste Entity Booking', () => {
             dateRange,
             2
         );
+        expect(booking.getId()).toBeDefined();
+        expect(booking.getTotalPrice()).toBe(property.totalValue(dateRange.getTotalNights()))
+        
+
+    });
+
+    it('Deve criar uma reserva com sucesso e salvar no banco de dados', () => {
+        const property = new Property(
+            'Casa na Praia',
+            'Uma bela Casa na Praia de São Miguel',
+            4,
+            200
+        );
+        const user = new User('João', 'joao@email.com');
+        const user2 = new User('Jose', 'Joseo@email.com');
+        const dateRange = new DateRange(new Date('2025-06-15'), new Date('2025-06-20'));
+        const dateRange2 = new DateRange(new Date('2025-06-22'), new Date('2025-06-25'));
+        const booking = new Booking(
+            property,
+            user,
+            dateRange,
+            2
+        );
+        const booking2 = new Booking(
+            property,
+            user2,
+            dateRange2,
+            3
+        );
+        expect(booking.getId()).toBeDefined();
+        expect(booking2.getId()).toBeDefined();
+        expect(property.getBooks().length).toBe(2);
+        console.log(property.getBooks());
+    });
+
+    it('Não deve criar uma reserva com sucesso e salvar no banco de dados', () => {
+        const property = new Property(
+            'Casa na Praia',
+            'Uma bela Casa na Praia de São Miguel',
+            4,
+            200
+        );
+        const user = new User('João', 'joao@email.com');
+        const user2 = new User('Jose', 'Joseo@email.com');
+        const dateRange = new DateRange(new Date('2025-06-15'), new Date('2025-06-20'));
+        const dateRange2 = new DateRange(new Date('2025-06-18'), new Date('2025-06-23'));
+        const booking = new Booking(
+            property,
+            user,
+            dateRange,
+            2
+        );
+
+        // expect(booking.getId()).toBeDefined();
+        expect(() => {
+            new Booking(
+            property,
+            user,
+            dateRange2,
+            3
+        );
+        }).toThrow("A propriedade não está disponível para o período selecionado.")
+        // console.log(property.getBooks());
+    });
+
+    it('Deve retornar um erro (O numero de hospedes deve ser maior ou igual a ---)', () => {
+        const property = new Property(
+            'Casa na Praia',
+            'Uma bela Casa na Praia de São Miguel',
+            4,
+            200
+        );
+        const user = new User('João', 'joao@email.com');
+        const dateRange = new DateRange(new Date('2025-06-10'), new Date('2025-06-12'));
         expect(() => {
             new Booking(
             property,
@@ -52,5 +126,5 @@ describe('Teste Entity Booking', () => {
         );
         }).toThrow(`O numero de hospedes deve ser menor ou igual a ${property.maxGuest}`);
     });
-
 });
+

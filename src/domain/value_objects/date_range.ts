@@ -21,7 +21,7 @@ export class DateRange {
     }
 
     overlaps(date: DateRange): boolean {
-        return this.dateStart <= date.dateEnd && date.getEndDate() <= this.dateEnd;
+        return this.dateStart <= date.dateEnd && date.getStartDate() <= this.dateEnd;
     }
 
     private validateDates(dateStart: Date, dateEnd: Date) {
