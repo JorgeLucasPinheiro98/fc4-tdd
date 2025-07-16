@@ -8,13 +8,15 @@ export class Booking {
     private user: User;
     private dateRange: DateRange;
     private guest: number;
+    private status: "CONFIRMED" | "CANCELED" = "CONFIRMED"
 
-    constructor(id: string, property: Property, user: User, dateRange: DateRange, guest: number) {
-        this.id = id;
+    constructor(property: Property, user: User, dateRange: DateRange, guest: number) {
+        this.id = String(Math.floor(Math.random() * 1001))
         this.property = property;
         this.user = user;
         this.dateRange = dateRange;
         this.guest = guest
+        this.validateGuest()
     }
 
     getId(): string {
@@ -31,5 +33,15 @@ export class Booking {
 
     getDateRange(): DateRange {
         return this.dateRange;
+    }
+
+    getStatus(): "CONFIRMED" | "CANCELED" {
+        return this.status;
+    }
+
+    private validateGuest() {
+        if (this.property.getMaxGuests() <= this.guest) {
+            throw new Error(`O numero de hospedes deve ser menor ou igual a ${this.property.getMaxGuests()}`)
+        }
     }
 }
