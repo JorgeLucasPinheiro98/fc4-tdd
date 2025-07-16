@@ -75,7 +75,6 @@ describe('Teste Entity Booking', () => {
         expect(booking.getId()).toBeDefined();
         expect(booking2.getId()).toBeDefined();
         expect(property.getBooks().length).toBe(2);
-        console.log(property.getBooks());
     });
 
     it('Não deve criar uma reserva com sucesso e salvar no banco de dados', () => {
@@ -95,8 +94,6 @@ describe('Teste Entity Booking', () => {
             dateRange,
             2
         );
-
-        // expect(booking.getId()).toBeDefined();
         expect(() => {
             new Booking(
             property,
@@ -105,7 +102,6 @@ describe('Teste Entity Booking', () => {
             3
         );
         }).toThrow("A propriedade não está disponível para o período selecionado.")
-        // console.log(property.getBooks());
     });
 
     it('Deve retornar um erro (O numero de hospedes deve ser maior ou igual a ---)', () => {
