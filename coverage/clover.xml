@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1752589410704" clover="3.2.0">
+  <project timestamp="1752589410704" name="All files">
+    <metrics statements="61" coveredstatements="61" conditionals="20" coveredconditionals="20" methods="23" coveredmethods="23" elements="104" coveredelements="104" complexity="0" loc="61" ncloc="61" packages="4" files="4" classes="4"/>
+    <package name="entities.booking">
+      <metrics statements="15" coveredstatements="15" conditionals="2" coveredconditionals="2" methods="7" coveredmethods="7"/>
+      <file name="booking.ts" path="C:\Users\GrupoITSS\Documents\GitHub\fc4-tdd\src\domain\entities\booking\booking.ts">
+        <metrics statements="15" coveredstatements="15" conditionals="2" coveredconditionals="2" methods="7" coveredmethods="7"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="43" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="44" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="entities.property">
+      <metrics statements="26" coveredstatements="26" conditionals="10" coveredconditionals="10" methods="8" coveredmethods="8"/>
+      <file name="property.ts" path="C:\Users\GrupoITSS\Documents\GitHub\fc4-tdd\src\domain\entities\property\property.ts">
+        <metrics statements="26" coveredstatements="26" conditionals="10" coveredconditionals="10" methods="8" coveredmethods="8"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="4" count="9" type="stmt"/>
+        <line num="6" count="9" type="stmt"/>
+        <line num="7" count="9" type="stmt"/>
+        <line num="8" count="9" type="stmt"/>
+        <line num="9" count="9" type="stmt"/>
+        <line num="10" count="9" type="stmt"/>
+        <line num="11" count="9" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="27" count="5" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="35" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="44" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="47" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="50" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="53" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="54" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="entities.user">
+      <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+      <file name="user.ts" path="C:\Users\GrupoITSS\Documents\GitHub\fc4-tdd\src\domain\entities\user\user.ts">
+        <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="14" count="5" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="21" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="25" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="26" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="value_objects">
+      <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
+      <file name="date_range.ts" path="C:\Users\GrupoITSS\Documents\GitHub\fc4-tdd\src\domain\value_objects\date_range.ts">
+        <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="5" count="11" type="stmt"/>
+        <line num="6" count="9" type="stmt"/>
+        <line num="7" count="9" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="24" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="28" count="11" type="cond" truecount="2" falsecount="0"/>
+        <line num="29" count="2" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
