@@ -159,7 +159,7 @@ describe('Teste Entity Booking', () => {
 
     })
 
-    it('Deve cancelar uma reserva com reembolso quando faltam mais de 1 dia para o check-in', () => {
+    it('Deve cancelar uma reserva com reembolso parcial quando a data estiver entre 1 e 7 dias antes do check-in', () => {
         const property = new Property(
             'Casa na Praia',
             'Uma bela Casa na Praia de São Miguel',
@@ -169,12 +169,29 @@ describe('Teste Entity Booking', () => {
         const user = new User('João', 'joao@email.com');
         const dateRange = new DateRange(new Date('2025-06-20'), new Date('2025-06-22'));
         const booking = new Booking(property, user, dateRange, 2);
-        const currentDate = new Date("2025-06-10");
+        const currentDate = new Date("2025-06-14");
         booking.cancel(currentDate);
 
         expect(booking.getStatus()).toBe("CANCELLED");
-        expect(booking.totalprice).toBe(0);
+        expect(booking.totalprice).toBe(200);
+    })
 
+    it('Não deve cancelar uma reserva que já esta cancelada', () => {
+        const property = new Property(
+            'Casa na Praia',
+            'Uma bela Casa na Praia de São Miguel',
+            4,
+            200
+        );
+        const user = new User('João', 'joao@email.com');
+        const dateRange = new DateRange(new Date('2025-06-20'), new Date('2025-06-22'));
+        const booking = new Booking(property, user, dateRange, 2);
+        const currentDate = new Date("2025-06-14");
+        booking.cancel(currentDate);
+
+        expect(() => {
+            booking.cancel(currentDate);
+        }).toThrow('Reserva já está cancelada')
     })
 });
 
