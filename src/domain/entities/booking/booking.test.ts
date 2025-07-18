@@ -122,5 +122,59 @@ describe('Teste Entity Booking', () => {
         );
         }).toThrow(`O numero de hospedes deve ser menor ou igual a ${property.maxGuest}`);
     });
+
+    it('Deve cancelar uma reserva sem reembolso quando faltam menos de 1 dia para o check-in', () => {
+        const property = new Property(
+            'Casa na Praia',
+            'Uma bela Casa na Praia de São Miguel',
+            4,
+            200
+        );
+        const user = new User('João', 'joao@email.com');
+        const dateRange = new DateRange(new Date('2025-06-20'), new Date('2025-06-22'));
+        const booking = new Booking(property, user, dateRange, 2);
+        const currentDate = new Date("2025-06-21");
+        booking.cancel(currentDate);
+
+        expect(booking.getStatus()).toBe("CANCELLED");
+        expect(booking.getTotalPrice()).toBe(400);
+
+    })
+
+    it('Deve cancelar uma reserva com reembolso quando faltam mais de 1 dia para o check-in', () => {
+        const property = new Property(
+            'Casa na Praia',
+            'Uma bela Casa na Praia de São Miguel',
+            4,
+            200
+        );
+        const user = new User('João', 'joao@email.com');
+        const dateRange = new DateRange(new Date('2025-06-20'), new Date('2025-06-22'));
+        const booking = new Booking(property, user, dateRange, 2);
+        const currentDate = new Date("2025-06-10");
+        booking.cancel(currentDate);
+
+        expect(booking.getStatus()).toBe("CANCELLED");
+        expect(booking.totalprice).toBe(0);
+
+    })
+
+    it('Deve cancelar uma reserva com reembolso quando faltam mais de 1 dia para o check-in', () => {
+        const property = new Property(
+            'Casa na Praia',
+            'Uma bela Casa na Praia de São Miguel',
+            4,
+            200
+        );
+        const user = new User('João', 'joao@email.com');
+        const dateRange = new DateRange(new Date('2025-06-20'), new Date('2025-06-22'));
+        const booking = new Booking(property, user, dateRange, 2);
+        const currentDate = new Date("2025-06-10");
+        booking.cancel(currentDate);
+
+        expect(booking.getStatus()).toBe("CANCELLED");
+        expect(booking.totalprice).toBe(0);
+
+    })
 });
 

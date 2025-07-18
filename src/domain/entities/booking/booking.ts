@@ -8,8 +8,8 @@ export class Booking {
     private user: User;
     private dateRange: DateRange;
     private guest: number;
-    private status: "CONFIRMED" | "CANCELED" = "CONFIRMED"
-    private totalprice: number
+    private status: "CONFIRMED" | "CANCELLED" = "CONFIRMED"
+    totalprice: number
 
     constructor(property: Property, user: User, dateRange: DateRange, guest: number) {
         this.id = String(Math.floor(Math.random() * 1001))
@@ -22,8 +22,6 @@ export class Booking {
         this.validateGuest();
         this.validateisAvailable()
         
-
-
         property.saveBooks(this)
     }
 
@@ -43,7 +41,7 @@ export class Booking {
         return this.dateRange;
     }
 
-    getStatus(): "CONFIRMED" | "CANCELED" {
+    getStatus(): "CONFIRMED" | "CANCELLED" {
         return this.status;
     }
 
@@ -60,6 +58,22 @@ export class Booking {
     private validateisAvailable() {
         if(!this.property.isAvailble(this.dateRange)) {
             throw new Error("A propriedade não está disponível para o período selecionado.")
+        }
+    }
+
+    cancel(currentDate: Date) {
+        this.status = "CANCELLED"
+
+        const checkInDate = this.dateRange.getStartDate();
+        const timeDiff = checkInDate.getTime() - currentDate.getTime();
+        const daysUntilCheckin = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+        if(daysUntilCheckin > 7){
+           return this.totalprice = 0;
+        }
+
+        if(daysUntilCheckin <= 7 && daysUntilCheckin > 1){
+           return this.totalprice = daysUntilCheckin * ;
         }
     }
 
