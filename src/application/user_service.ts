@@ -7,17 +7,19 @@ export default class userService implements IService {
     constructor(private repository: IRepository) {
 
     }
-    create(user: IUser): void {
-        this.repository.save(user)
+    async create(user: IUser): Promise<void> {
+        await this.repository.save(user)
     }
 
-    getAll(): IUser[] {
-        const users = this.repository.getAll()
+    async getAll(): Promise<IUser[]> {
+        const users = await this.repository.getAll()
         return users
     }
 
-    getByName(name: string): IUser | undefined {
-        throw new Error("Method not implemented.");
+    async getByName(name: string): Promise<IUser | null> {
+        const user = await this.repository.getByName(name)
+        if(!user)return null
+        return user
     }
 
     async findUserById(id: string): Promise<User | null> {

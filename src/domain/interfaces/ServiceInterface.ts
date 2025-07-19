@@ -1,7 +1,7 @@
 import { IUser } from "../entities/user/user";
 
 export default interface IService {
-    create(user: IUser): void
-    getAll(): IUser[];
-    getByName(name: string): IUser | undefined;
+    create(user: IUser): Promise<void>;
+    getAll(): Promise<IUser[]>;
+    getByName(name: string): Promise<IUser | null>
 }
