@@ -3,13 +3,23 @@ import { DateRange } from "../../value_objects/date_range";
 import { Property } from "../property/property";
 import { User } from "../user/user";
 
-export class Booking {
-    private id: string;
-    private property: Property;
-    private user: User;
-    private dateRange: DateRange;
-    private guest: number;
-    private status: "CONFIRMED" | "CANCELLED" = "CONFIRMED"
+export type IBooking = {
+    id: string;
+    property: Property;
+    user: User;
+    dateRange: DateRange;
+    guest: number;
+    status: "CONFIRMED" | "CANCELLED";
+    totalprice: number;
+}
+
+export class Booking implements IBooking {
+    id: string;
+    property: Property;
+    user: User;
+    dateRange: DateRange;
+    guest: number;
+    status: "CONFIRMED" | "CANCELLED" = "CONFIRMED"
     totalprice: number
 
     constructor(property: Property, user: User, dateRange: DateRange, guest: number) {

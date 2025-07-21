@@ -1,10 +1,10 @@
-import { IUser, User } from "../domain/entities/user/user";
-import IRepository from "../domain/interfaces/RepositoryInterface";
-import IService from "../domain/interfaces/ServiceInterface";
+import { IUser} from "../domain/entities/user/user";
+import { IUserRepository } from "../domain/interfaces/RepositoryInterface";
+import { IUserService } from "../domain/interfaces/ServiceInterface";
 
-export default class userService implements IService {
+export class UserService implements IUserService {
     
-    constructor(private repository: IRepository) {
+    constructor(private repository: IUserRepository) {
 
     }
     async create(user: IUser): Promise<void> {
@@ -16,13 +16,11 @@ export default class userService implements IService {
         return users
     }
 
-    async getByName(name: string): Promise<IUser | null> {
-        const user = await this.repository.getByName(name)
-        if(!user)return null
-        return user
+    async getByName(name: string): Promise<IUser | undefined> {
+        return await this.repository.getByName(name)
     }
 
-    async findUserById(id: string): Promise<User | null> {
-        return null;
+    async getById(id: string): Promise<IUser | undefined> {
+        return await this.repository.getById(id)
     }
 }

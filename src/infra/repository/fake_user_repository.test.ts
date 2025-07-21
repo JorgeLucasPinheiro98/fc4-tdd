@@ -1,7 +1,7 @@
-import { FakeRepository } from './fake_user_repository'
+import { FakeUserRepository } from './fake_user_repository'
 
-test('Deve criaar e salvaar um user', async() => {
-    const fakeRepository = new FakeRepository();
+test('Deve criaar e salvar um user', async() => {
+    const fakeRepository = new FakeUserRepository();
     const user = {
         id: '1',
         name: 'John Doe',

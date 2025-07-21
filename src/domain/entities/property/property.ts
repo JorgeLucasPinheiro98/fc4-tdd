@@ -1,7 +1,15 @@
 import { DateRange } from "../../value_objects/date_range";
 import {Booking } from "../booking/booking";
 
-export class Property{
+export type IProperty = {
+    id: string;
+    name: string;
+    description: string;
+    maxGuest: number;
+    basePrice: number;
+}
+
+export class Property implements IProperty{
     id: string;
     private books: Booking[] = []
 
@@ -73,4 +81,4 @@ export class Property{
             throw new Error('preço inicial ausente');
         }
     }
-}
+} 
