@@ -97,7 +97,7 @@ describe('Teste Entity Booking', () => {
         expect(() => {
             new Booking(
             property,
-            user,
+            user2,
             dateRange2,
             3
         );

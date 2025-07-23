@@ -1,12 +1,9 @@
-import { Booking } from "../domain/entities/booking/booking";
-import { Property } from "../domain/entities/property/property";
-import { User } from "../domain/entities/user/user";
 import { IPropertyRepository, IUserRepository } from "../domain/interfaces/RepositoryInterface";
-import { DateRange } from "../domain/value_objects/date_range";
 import { FakeBookingRepository } from '../infra/repository/fake_booking_repository';
 import { BookingService } from './booking_service';
 import { PropertyService } from './property_service'
 import { UserService } from './user_service'
+import { CreateBookingDTO } from './dtos/create_booking_dto'
 
 jest.mock("./property_service");
 jest.mock('./user_service');
@@ -32,30 +29,39 @@ describe('Booking Service', () => {
         bookingRepository = new FakeBookingRepository();
         bookingService = new BookingService(
             bookingRepository,
-            mockPropertyService,
-            mockUserService
+            mockUserService,
+            mockPropertyService
         );
     })
 
-    it('Espero criar e salvar um booking no banco de dados', async () => {
-        const property = new Property(
-            'Casa na Praia',
-            'Uma bela Casa na Praia de São Miguel',
-            4,
-            200
-        );
-        const user = new User('João', 'joao@email.com');
-        const dateRange = new DateRange(new Date('2025-06-15'), new Date('2025-06-20'));
-        const booking = new Booking(
-            property,
-            user,
-            dateRange,
-            2
-        );
-        await bookingService.create(booking);
-        const allBooking = await bookingService.getAll();
-        const bookingResponse = await bookingService.getById(booking.getId());
-        expect(allBooking).toBeDefined();
-        expect(bookingResponse?.id).toBe(booking.id);
+    it('Deve criar uma reserva com sucesso usando repositorio fake', async () => {
+        const mockProperty = {
+            getId: jest.fn().mockReturnValue('1'),
+            isAvailable: jest.fn().mockReturnValue(true),
+            validateGuestCount: jest.fn(),
+            calculateTotalPrice: jest.fn().mockReturnValue(500),
+            addBooking: jest.fn(),
+        } as any;
+
+        const mockUser = {
+            getId: jest.fn().mockReturnValue('1'),
+        } as any;
+
+        mockPropertyService.getById.mockResolvedValue(mockProperty);
+        mockUserService.getById.mockResolvedValue(mockUser);
+
+        const bookingDTO: CreateBookingDTO = {
+            propertId: '1',
+            guestId: '1',
+            startDate: new Date('2025-06-01'),
+            endDate: new Date('2025-06-10'),
+            guestCount: 2,
+        };
+
+        const result = await bookingService.createBooking   (bookingDTO);
+
+        expect(result).toBeDefined();
+        expect(result.getStatus()).toBe('CONFIRMED')
+        expect(result.getTotalPrice()).toBe(500);
     });
 });

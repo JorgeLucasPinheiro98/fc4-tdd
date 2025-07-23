@@ -1,18 +1,18 @@
-import { IBooking } from "../../domain/entities/booking/booking";
+import { Booking } from "../../domain/entities/booking/booking";
 import { IBookingRepository } from "../../domain/interfaces/RepositoryInterface";
 
 export class FakeBookingRepository implements IBookingRepository {
-    bookings: IBooking[] = []
+    bookings: Booking[] = []
     
-    async save(booking: IBooking): Promise<void> {
+    async save(booking: Booking): Promise<void> {
         this.bookings.push(booking)
     }
     
-    async getAll(): Promise<IBooking[]> {
+    async getAll(): Promise<Booking[]> {
         return this.bookings;
     }
     
-    async getById(id: string): Promise<IBooking | undefined> {
+    async getById(id: string): Promise<Booking | undefined> {
         return this.bookings.find((booking) => booking.id === id);
     }
 }
